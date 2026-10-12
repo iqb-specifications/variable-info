@@ -28,3 +28,37 @@ Read more:
 ## To contributors
 
 If you ever need to update the js code for npm without modifying the spec, please do not change major and minor version numbers. Instead, increase the patch number only to keep consistent to the spec.
+
+# Spezifikation
+
+Diese Datenstruktur wird für den Datenaustausch zwischen dem Schemer und der Unit-Definition benutzt. Da beide TBA-Plugins ihre Spezifikation im Detail nicht veröffentlichen sollen, muss es einen anderen Weg geben, die in der UI-Definition der Unit angelegten Variablen mitzuteilen. 'Variablen' sind Werte-Träger, also mit einer ID identifizierbare Quellen von Antwortdaten. Wie genau diese Antwortdaten entstehen oder wo, das ist uninteressant. Nur dass es sie gibt, ist z. B. für die Planung der Kodierung wichtig.
+
+Die folgenden Parameter werden mitgeliefert:
+
+### `id`, `alias`, `type`, `format`
+
+* Eine Variable braucht eine innerhalb der Unit eindeutige Bezeichnung.
+* Ein `alias` ist eine alternative ID, die durch User vergeben werden kann. Dann kann die ID der Variable nicht mehr geändert werden und bleibt konstant über alle Verarbeitungsschritte und Versionen. Der Alias kann aber nach Bedarf geändert werden. Das IQB hat diese Trennung eingeführt, als sich Umbenennungen von Variablen häuften und jede Umbenennung Inkonsistenzen verursachte (Ableitungen schlugen fehl, Seitenzustände wurden falsch ermittelt).
+* Mögliche Werte für Typ:
+  - `STRING`, `INTEGER`, `NUMBER`, `BOOLEAN`: Entsprechend gängiger simpler Datentypen
+  - `ATTACHMENT`: bezeichnet ein erzeugtes Medium, z. B. ein Bild. Im Kern handelt es sich hier um einen String, der aber eine Referenz darstellt und dem Auswertungssystem das Auffinden des zugehörigen Mediums ermöglicht.
+  - `NO_VALUE`: Der Editor ist überzeugt, dass diese Variable für die Auswertung keine Rolle spielt. Manchmal ist z. B. die Sichtbarkeit eines Elementes wichtig zu speichern, aber es wird nie ein nützlicher Wert erzeugt.
+  - `JSON`: Der Wert ist ein stringifiziertes JSON-Objekt. Dies kann bei komplexen Eingabeelementen erforderlich sein, z. B. Text mit eingebetteten Formeln. Diese Antworten werden dann meist manuell kodiert.
+  - `CODED`: Hier wird die Antwort bereits durch den Player codiert. Es kann für die Itementwicklung wesentlich angenehmer sein, die richtige bzw. falsche Antwort bereits im Editor zu definieren und nicht erst im Schemer. Der Player schickt dann die Antworten bereits mit der Information `CODE` und `SCORE` und setzt als Antwortstatus `CODING_COMPLETE`. Die Kodierung wird dann als abgeschlossen angesehen und jede Kodierregel ignoriert.
+* Werte für `format`:
+  - `TEXT_SELECTION`: Ein String, der Daten für eine Textmarkierung enthält
+  - `IMAGE`, `CAPTURE_IMAGE`, `AUDIO`: Spezifiziert den Datentyp `ATTACHMENT`
+  - `GGB_FILE`, `GGB_VARIABLE`: Strings mit besonderem Bezug zu GeoGebra
+  - `NON_NEGATIVE`: spezifiziert `integer` oder `number`
+  - `LATEX`, `MATH_ML`, `MATH_TABLE`: Strings mit besonderem Bezug zu mathematischen Formeln oder Ausdrücken
+  - `MATH_TEXT_MIX`: Gemischtes JSON-Objekt mit Text und Formeln
+  - `CHEM_ELEMENT_SYMBOLS`, `CHEM_MOLECULE`: Antwortformate, die über Chemie-Widgets erzeugt werden.
+
+### `multiple`, `nullable`
+
+Diese booleschen Werte kennzeichnen, ob die Variable ein Array des beschriebenen Typs und Formats enthält und ob der Wert `null` möglich ist.
+
+### `values`, `valuePositionLabels`, `valuesComplete`
+
+Diese Angaben liefern genauere Informationen über die möglichen Werte der Variablen. Wenn `valuesComplete` true ist, dann handelt es sich sogar um eine vollständige Liste, und die Kodierung kann automatisch erfolgen.
+
