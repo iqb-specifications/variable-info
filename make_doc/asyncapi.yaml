@@ -7,8 +7,8 @@ info:
     url: https://creativecommons.org/publicdomain/zero/1.0/
   version: " - click on schema id to expand"
   contact:
-    name: Home of verona-interfaces (German only)
-    url: https://verona-interfaces.github.io/
+    name: Home of tba plugins (German only)
+    url: https://iqb-specifications.github.io/concepts/plugins/
 channels:
   iqb_data_structures:
     subscribe:
