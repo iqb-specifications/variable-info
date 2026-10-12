@@ -21,10 +21,10 @@ The package also contains `variable-validation-cases.json` as a shared conforman
 
 Read more:
 
-* [All interface specifications of Verona](https://verona-interfaces.github.io/) (German only)
+* [All interface specifications of tba plugins](https://iqb-specifications.github.io/concepts/plugins/) (German only)
 * [All specifications of IQB](https://iqb-specifications.github.io/) (German only)
 * [Learn about TBA](https://iqb-berlin.github.io/tba-info/) (German only)
 
 ## To contributors
 
-If you ever need to update the js code for npm without modifying the spec, please do not change major and minor version number. Increase only the patch number to keep consistent to the spec.
+If you ever need to update the js code for npm without modifying the spec, please do not change major and minor version numbers. Instead, increase the patch number only to keep consistent to the spec.
