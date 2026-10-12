@@ -1,8 +1,8 @@
 {
-  "name": "verona-variable-info",
+  "name": "variable-info",
   "author": "IQB - Institut zur Qualitätsentwicklung im Bildungswesen",
   "license": "MIT",
-  "description": "Data interface for variable info in Verona Modules.",
+  "description": "Data interface for variable info in tba plugins.",
   "scripts": {
     "test": "jest",
     "test_schema": "jest test variable-info.schema.json ./test",
@@ -13,12 +13,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/verona-interfaces/variable-info.git"
+    "url": "git+https://github.com/iqb-specifications/variable-info.git"
   },
   "bugs": {
-    "url": "https://github.com/verona-interfaces/variable-info/issues"
+    "url": "https://github.com/iqb-specifications/variable-info/issues"
   },
-  "homepage": "https://github.com/verona-interfaces/variable-info#readme",
+  "homepage": "https://github.com/iqb-specifications/variable-info#readme",
   "eslintConfig": {
     "overrides": [
       {
